@@ -108,6 +108,9 @@ module.exports = {
       error.code = 401;
       throw error;
     }
+    
+    console.log("IM POST INPUT");
+    console.log(postInput)
 
     const post = new Post({
       title: postInput.title,
@@ -118,6 +121,7 @@ module.exports = {
 
     const createdPost = await post.save();
     user.posts.push(createdPost);
+    await user.save();
 
     return {
       ...createdPost._doc,
