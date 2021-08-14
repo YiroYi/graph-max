@@ -10,6 +10,7 @@ const graphqlSchema = require("./graphql/schema");
 const graphqlResolver = require("./graphql/resolvers");
 const dotenv = require("dotenv");
 dotenv.config();
+const auth = require('./middleware/is-auth');
 
 const db = process.env.DB_URL;
 
@@ -56,6 +57,8 @@ app.use((req, res, next) => {
 
   next();
 });
+
+app.use(auth);
 
 app.use(
   "/graphql",
